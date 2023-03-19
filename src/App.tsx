@@ -1,6 +1,8 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import { Calendar } from './components/Calendar';
 
-function App() {}
+function App() {
+	return <Calendar />;
+}
 
 export default App;
