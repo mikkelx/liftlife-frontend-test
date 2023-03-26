@@ -1,8 +1,9 @@
-import React from 'react';
-import { Calendar } from './components/Calendar';
+import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import LandingPage from "./pages/LandingPage";
 
-function App() {
-	return <Calendar />;
-}
+const App = () => {
+  return <LandingPage />;
+};
 
 export default App;
