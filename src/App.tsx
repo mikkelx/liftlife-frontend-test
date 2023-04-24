@@ -1,5 +1,4 @@
 import React from 'react';
-import LandingPage from './pages/LandingPage';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -9,6 +8,7 @@ import utc from 'dayjs/plugin/utc';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pl';
 import { createTheme, ThemeProvider } from '@mui/material';
+import LandingPage from './pages/LandingPage';
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
@@ -62,6 +62,24 @@ function App() {
       },
       secondary: {
         main: '#ffc107',
+      },
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: '3rem',
+            padding: '16px',
+          },
+        },
+      },
+      MuiPaper: {
+        defaultProps: {
+          elevation: 3,
+          sx: {
+            borderRadius: '45px',
+          },
+        },
       },
     },
   });
