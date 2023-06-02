@@ -16,6 +16,7 @@ import { Routes, Route } from 'react-router-dom';
 import { SignIn } from './pages/SignIn';
 import { ProfilePage } from './pages/Profile/ProfilePage';
 import { ProtectedRoute, ProtectedRouteProps } from './components/ProtectedRoute/ProtectedRoute';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
@@ -45,13 +46,14 @@ declare module '@mui/material/styles' {
   }
 }
 
-export const AppContext = createContext({isMobile: false, isAuthenticated: false});
+export const AppContext = createContext({ isMobile: false, isAuthenticated: false });
 
 export function App() {
   dayjs.extend(updateLocale);
   dayjs.extend(utc);
   dayjs.locale('pl');
 
+  const queryClient = new QueryClient();
   const theme = createTheme({
     breakpoints: {
       values: {
@@ -99,21 +101,53 @@ export function App() {
   };
 
   return (
-    <AppContext.Provider value={{isMobile, isAuthenticated}}>
-      <ThemeProvider theme={theme}>
-        {!isMobile && <AppBar />}
-        <Routes>
-        <Route path='/' element={<LandingPage />}/>
-        <Route path='/signin' element={<SignIn/>}/>
-        <Route element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<ProfilePage defaultTabOpened={0}/>} />} path='/workouts' />
-        <Route element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<ProfilePage defaultTabOpened={1}/>} />} path='/diet' />
-        <Route element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<ProfilePage defaultTabOpened={2}/>} />} path='/coach' />
-        <Route element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<ProfilePage />} />} path='/profile' />
-        {/*TODO: explore coaches */}
-        <Route element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<LandingPage />} />} path='/explore' />
-        </Routes>
-        {isMobile && <BottomNavigation />}
-      </ThemeProvider>
+    <AppContext.Provider value={{ isMobile, isAuthenticated }}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          {!isMobile && <AppBar />}
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route
+              element={
+                <ProtectedRoute
+                  {...defaultProtectedRouteProps}
+                  outlet={<ProfilePage defaultTabOpened={0} />}
+                />
+              }
+              path="/workouts"
+            />
+            <Route
+              element={
+                <ProtectedRoute
+                  {...defaultProtectedRouteProps}
+                  outlet={<ProfilePage defaultTabOpened={1} />}
+                />
+              }
+              path="/diet"
+            />
+            <Route
+              element={
+                <ProtectedRoute
+                  {...defaultProtectedRouteProps}
+                  outlet={<ProfilePage defaultTabOpened={2} />}
+                />
+              }
+              path="/coach"
+            />
+            <Route
+              element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<ProfilePage />} />}
+              path="/profile"
+            />
+            {/*TODO: explore coaches */}
+            <Route
+              element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<LandingPage />} />}
+              path="/explore"
+            />
+          </Routes>
+          {isMobile && <BottomNavigation />}
+        </ThemeProvider>
+      </QueryClientProvider>
     </AppContext.Provider>
   );
 }
