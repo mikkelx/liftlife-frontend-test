@@ -16,7 +16,7 @@ jobs:
       - name: Find and Replace api key
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: 'variable_api_key'
+          find: "variable_api_key"
           replace: "${{ secrets.FIREBASE_API_KEY }}"
           include: "firebase.ts"
           regex: false
@@ -24,7 +24,7 @@ jobs:
       - name: Find and Replace sender id
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: 'variable_sender_id'
+          find: "variable_sender_id"
           replace: "${{ secrets.FIREBASE_SENDER_ID }}"
           include: "firebase.ts"
           regex: false
@@ -32,28 +32,31 @@ jobs:
       - name: Find and Replace app id
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: 'variable_app_id'
+          find: "variable_app_id"
           replace: "${{ secrets.FIREBASE_APP_ID }}"
           include: "firebase.ts"
           regex: false
 
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Display File
+        run: cat path/to/your/file.txt
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # - name: Set up Docker Buildx
+      #   id: buildx
+      #   uses: docker/setup-buildx-action@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 19
+      # - name: Login to DockerHub
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build docker image
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/microservices:liftlife-frontend-test
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 19
 
-      - name: Push docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/microservices:liftlife-frontend-test
+      # - name: Build docker image
+      #   run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/microservices:liftlife-frontend-test
+
+      # - name: Push docker image
+      #   run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/microservices:liftlife-frontend-test

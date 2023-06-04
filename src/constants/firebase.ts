@@ -3,7 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'variable_api_key',
+  apiKey: variable_api_key,
 
   authDomain: 'realtime-database-prototype.firebaseapp.com',
 
@@ -13,9 +13,9 @@ const firebaseConfig = {
 
   storageBucket: 'realtime-database-prototype.appspot.com',
 
-  messagingSenderId: 'variable_sender_id',
+  messagingSenderId: variable_sender_id,
 
-  appId: 'variable_app_id',
+  appId: variable_app_id,
 };
 
 const app = initializeApp(firebaseConfig);
