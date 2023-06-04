@@ -38,7 +38,7 @@ jobs:
           regex: false
 
       - name: Display File
-        run: cat path/to/your/file.txt
+        run: cat src/constants/firebase.ts
 
       # - name: Set up Docker Buildx
       #   id: buildx
