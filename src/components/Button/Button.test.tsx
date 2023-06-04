@@ -12,7 +12,7 @@ describe('Component: Button', () => {
     expect(element).toBeInTheDocument();
   });
 
-  it('should call function onClick', () => {
+  it('should call onClick function', () => {
     const clickFn = jest.fn();
 
     render(
