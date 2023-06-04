@@ -31,8 +31,11 @@ export const SignIn = () => {
       const user = userCredential.user;
       const userToken = await user.getIdToken();
 
+      const idToken = await user.getIdTokenResult();
+      const role = idToken.claims.role;
+
       setCookie('userToken', userToken, { expires: 2 });
-      handleLoginSuccess();
+      handleLoginSuccess(role);
     } catch (error) {
       if (error instanceof Error) handleLoginFail(error.message ?? 'Unknown error occured');
     }
@@ -44,11 +47,14 @@ export const SignIn = () => {
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(authentication, googleProvider);
-      const credentials = GoogleAuthProvider.credentialFromResult(result);
-      const token = credentials?.accessToken;
+      const user = result.user;
+      const userToken = await user.getIdToken();
 
-      setCookie('userToken', token, { expires: 2 });
-      handleLoginSuccess();
+      const idToken = await user.getIdTokenResult();
+      const role = idToken.claims.role;
+
+      setCookie('userToken', userToken, { expires: 2 });
+      handleLoginSuccess(role);
     } catch (error: unknown) {
       handleLoginFail((error as Error).message);
     }
@@ -58,8 +64,8 @@ export const SignIn = () => {
     showSnackbar(errorMessage, 'error');
   };
 
-  const handleLoginSuccess = () => {
-    onAuthenticatedChange(true);
+  const handleLoginSuccess = (role: string) => {
+    onAuthenticatedChange(true, role);
     navigate('/');
   };
 
