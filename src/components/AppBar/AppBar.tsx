@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppBar as MUIAppBar, Box, Button, Toolbar, Link, IconButton } from '@mui/material';
+import { AppBar as MUIAppBar, Box, Button, Toolbar, Typography, IconButton } from '@mui/material';
 import { Container } from '@mui/system';
 import { Adb, Login, Logout } from '@mui/icons-material';
 import { navigationActionData } from '../BottomNavigation/BottomNavigation.constants';
@@ -42,11 +42,11 @@ export const AppBar = (props: AppBarProps) => {
           >
             <Box display="flex" alignItems="center">
               <Adb sx={{ display: { mobile: 'none', desktop: 'flex' }, mr: 1 }} />
-              <Link
+              <Typography
                 variant="h6"
                 noWrap
                 component="a"
-                href="/#"
+                onClick={() => navigate('/')}
                 sx={{
                   color: 'inherit',
                   display: { mobile: 'none', desktop: 'flex' },
@@ -56,7 +56,7 @@ export const AppBar = (props: AppBarProps) => {
                 }}
               >
                 LiftLife
-              </Link>
+              </Typography>
               <Box display="flex" sx={{ gap: 1 }}>
                 {isNotLoggedIn &&
                   navigationActionData.notLoggedIn.map(item => (
