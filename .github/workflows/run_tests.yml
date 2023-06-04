@@ -4,11 +4,13 @@ on:
   pull_request:
     branches: ["main"]
     types:
-      - closed
+      - opened
       - synchronize
+      - edited
 
 jobs:
   Tests:
+    name: Run tests
     runs-on: ubuntu-latest
 
     steps:
