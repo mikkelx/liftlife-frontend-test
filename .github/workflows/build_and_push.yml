@@ -26,7 +26,7 @@ jobs:
         with:
           find: "variable_sender_id"
           replace: "${{ secrets.FIREBASE_SENDER_ID }}"
-          include: "firebase.ts"
+          include: "src/constants/firebase.ts"
           regex: false
       
       - name: Find and Replace app id
