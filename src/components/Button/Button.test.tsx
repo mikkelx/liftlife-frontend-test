@@ -5,14 +5,14 @@ import userEvent from '@testing-library/user-event';
 
 describe('Component: Button', () => {
   it('should correctly render Button', () => {
-    render(<Button type="button">Test button</Button>);
+    render(<Button type="button">Test Button</Button>);
 
-    const element = screen.getByText('Test button');
+    const element = screen.getByText('Test Button');
 
     expect(element).toBeInTheDocument();
   });
 
-  it('should call function onClick', () => {
+  it('should call onClick function', () => {
     const clickFn = jest.fn();
 
     render(
