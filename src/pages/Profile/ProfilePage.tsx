@@ -7,7 +7,7 @@ import { getCookie } from 'typescript-cookie';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { getDownloadURL, ref } from '@firebase/storage';
-import { storage } from '../SignIn/firebase';
+import { storage } from '../../constants/firebase';
 import { useSnackbar } from '../../hooks/useSnackbar';
 import { Snackbar } from '../../components/Snackbar/Snackbar';
 import { ErrorPage } from '../ErrorPage/ErrorPage';

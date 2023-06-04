@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { UserCredentials } from './SignIn.types';
-import { auth, signInWithEmailAndPassword } from './firebase';
+import { auth, signInWithEmailAndPassword } from '../../constants/firebase';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { SignInPanel } from './SignInPanel';
 import { setCookie } from 'typescript-cookie';

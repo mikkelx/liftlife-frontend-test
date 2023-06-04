@@ -3,7 +3,7 @@ import React from 'react';
 import { Spinner } from '../../components/Spinner/Spinner';
 import axios from 'axios';
 import { coachProps } from '../../constants/coach';
-import { storage } from '../SignIn/firebase';
+import { storage } from '../../constants/firebase';
 import { getDownloadURL, ref } from '@firebase/storage';
 import { useSnackbar } from '../../hooks/useSnackbar';
 import { Snackbar } from '../../components/Snackbar/Snackbar';
