@@ -1,14 +1,11 @@
 name: Build and Publish
 
 on:
-  pull_request:
+  push:
     branches: ["main"]
-    types:
-      - closed
 
 jobs:
   if_merged_build-and-push-docker-image:
-    if: github.event.pull_request.merged == true
     name: Build Docker image and push to repository
     runs-on: ubuntu-latest
 
@@ -19,7 +16,7 @@ jobs:
       - name: Find and Replace api key
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "variable_api_key"
+          find: 'variable_api_key'
           replace: "${{ secrets.FIREBASE_API_KEY }}"
           include: "firebase.ts"
           regex: false
@@ -27,7 +24,7 @@ jobs:
       - name: Find and Replace sender id
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "variable_sender_id"
+          find: 'variable_sender_id'
           replace: "${{ secrets.FIREBASE_SENDER_ID }}"
           include: "firebase.ts"
           regex: false
@@ -35,7 +32,7 @@ jobs:
       - name: Find and Replace app id
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "variable_app_id"
+          find: 'variable_app_id'
           replace: "${{ secrets.FIREBASE_APP_ID }}"
           include: "firebase.ts"
           regex: false
@@ -56,8 +53,8 @@ jobs:
           node-version: 19
 
       - name: Build docker image
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/microservices:liftlife-frontend
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/microservices:liftlife-frontend-test
 
       - name: Push docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/microservices:liftlife-frontend
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/microservices:liftlife-frontend-test
 
